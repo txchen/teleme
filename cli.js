@@ -27,7 +27,9 @@ try {
 }
 
 if (!configObj.token || !configObj.chatid) {
-  console.error(`[ERROR] - 'token' or 'chatid' not defined in config file: "${configFileName}"`)
+  console.error(
+    `[ERROR] - 'token' or 'chatid' not defined in config file: "${configFileName}"`
+  )
   process.exit(2)
 }
 
@@ -39,11 +41,12 @@ text += `\n*dir*: \`${process.cwd()}\``
 const jsonPayload = JSON.stringify({
   text,
   chat_id: configObj.chatid,
-  'parse_mode': 'markdown'
+  parse_mode: 'markdown'
 })
 
 const https = require('https')
-const req = https.request({
+const req = https.request(
+  {
     hostname: 'api.telegram.org',
     port: 443,
     path: `/bot${configObj.token}/sendMessage`,
@@ -53,9 +56,12 @@ const req = https.request({
       'Content-Length': jsonPayload.length
     }
   },
-  (res) => {
+  res => {
     if (res.statusCode !== 200) {
-      console.error('[ERROR] - failed to call telegram api, statu code:', res.statusCode)
+      console.error(
+        '[ERROR] - failed to call telegram api, statu code:',
+        res.statusCode
+      )
     }
   }
 )
