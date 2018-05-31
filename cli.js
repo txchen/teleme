@@ -7,6 +7,23 @@ const hostname = os.hostname()
 const homedir = os.homedir()
 const configFileName = path.join(os.homedir(), '.config/teleme/config.json')
 
+let text = 'Command completed'
+if (process.argv.length > 2) {
+  if (process.argv[2] === '--help') {
+    console.log(`
+  Usage
+    $ teleme <message>
+  Examples
+    $ teleme
+    $ tlm
+    $ teleme "My sexy message"
+  See https://github.com/txchen/teleme for detailed instruction.
+  `)
+    process.exit()
+  }
+  text = process.argv[2]
+}
+
 // read config from ~/.config/teleme/config.json
 if (!fs.existsSync(configFileName)) {
   if (!fs.existsSync(path.join(homedir, '.config'))) {
@@ -33,7 +50,6 @@ if (!configObj.token || !configObj.chatid) {
   process.exit(2)
 }
 
-let text = 'Command completed'
 text += ` @\`${hostname}\``
 text += `\n*dir*: \`${process.cwd()}\``
 
@@ -58,10 +74,7 @@ const req = https.request(
   },
   res => {
     if (res.statusCode !== 200) {
-      console.error(
-        '[ERROR] - failed to call telegram api, statu code:',
-        res.statusCode
-      )
+      console.error(`[ERROR] - failed to call telegram api, status code: ${res.statusCode}`)
     }
   }
 )
