@@ -12,11 +12,13 @@ if (process.argv.length > 2) {
   if (process.argv[2] === '--help') {
     console.log(`
   Usage
+    $ tlm <message>
+    OR
     $ teleme <message>
   Examples
     $ teleme
     $ tlm
-    $ teleme "My sexy message"
+    $ teleme "My sexy message ❤️ "
   See https://github.com/txchen/teleme for detailed instruction.
   `)
     process.exit()
