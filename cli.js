@@ -58,8 +58,7 @@ text += `\n*dir*: \`${process.cwd()}\``
 // call telegram REST api
 const jsonPayload = JSON.stringify({
   text,
-  chat_id: configObj.chatid,
-  parse_mode: 'markdown'
+  chat_id: configObj.chatid
 })
 
 const https = require('https')
