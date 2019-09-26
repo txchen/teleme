@@ -7,6 +7,13 @@ const hostname = os.hostname()
 const homedir = os.homedir()
 const configFileName = path.join(os.homedir(), '.config/teleme/config.json')
 
+const htmlEntities = [
+  { regex: /&/g, entity: '&amp;' },
+  { regex: />/g, entity: '&gt;' },
+  { regex: /</g, entity: '&lt;' },
+  { regex: /"/g, entity: '&quot;' },
+];
+
 let text = 'Command completed'
 if (process.argv.length > 2) {
   if (process.argv[2] === '--help') {
@@ -52,13 +59,18 @@ if (!configObj.token || !configObj.chatid) {
   process.exit(2)
 }
 
-text += ` @\`${hostname}\``
-text += `\n*dir*: \`${process.cwd()}\``
+for (ent of htmlEntities){
+  text = text.replace(ent.regex, ent.entity)
+}
+text = text.split('\\n').join('\n') // to support multiline string in cli
+
+text += `<pre>${process.cwd()} [${hostname}]</pre>`
 
 // call telegram REST api
 const jsonPayload = JSON.stringify({
   text,
-  chat_id: configObj.chatid
+  chat_id: configObj.chatid,
+  parse_mode: 'HTML',
 })
 
 const https = require('https')
