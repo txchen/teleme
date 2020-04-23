@@ -78,7 +78,7 @@ text += `<pre>[${hostname}:${process.cwd()}]</pre>`
 // call telegram REST api
 const jsonPayload = JSON.stringify({
   text,
-  chat_id: configObj.chatid,
+  chat_id: configObj[chatidKey],
   parse_mode: 'HTML',
 })
 
@@ -87,7 +87,7 @@ const req = https.request(
   {
     hostname: 'api.telegram.org',
     port: 443,
-    path: `/bot${configObj.token}/sendMessage`,
+    path: `/bot${configObj[tokenKey]}/sendMessage`,
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
