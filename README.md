@@ -22,7 +22,9 @@ Then, put the information into `~/.config/teleme/config.json`, such as:
 ```json
 {
   "token": "TOKEN_OF_THE_BOT",
-  "chatid": "12345678"
+  "chatid": "12345678",
+  "bot2_token": "TOKEN_OF_ANOTHER_BOT", # optional
+  "bot2_chatid": "23456789", # optional
 }
 ```
 
@@ -40,6 +42,8 @@ $ teleme --help
     $ tlm <message>
     OR
     $ teleme <message>
+    OR if you want to use the non-default bot
+    $ TLMBOT=bot2 teleme <message>
   Examples
     $ teleme
     $ tlm

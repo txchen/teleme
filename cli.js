@@ -22,6 +22,8 @@ if (process.argv.length > 2) {
     $ tlm <message>
     OR
     $ teleme <message>
+    OR if you want to use the non-default bot
+    $ TLMBOT=bot2 teleme <message>
   Examples
     $ teleme
     $ tlm
@@ -52,9 +54,16 @@ try {
   process.exit(2)
 }
 
-if (!configObj.token || !configObj.chatid) {
+let tokenKey = 'token'
+let chatidKey = 'chatid'
+if (process.env.TLMBOT != null && process.env.TLMBOT.length) {
+  tokenKey = process.env.TLMBOT + '_' + tokenKey
+  chatidKey = process.env.TLMBOT + '_' + chatidKey
+}
+
+if (!configObj[tokenKey] || !configObj[chatidKey]) {
   console.error(
-    `[ERROR] - 'token' or 'chatid' not defined in config file: "${configFileName}"`
+    `[ERROR] - '${tokenKey}' or '${chatidKey}' not defined in config file: "${configFileName}"`
   )
   process.exit(2)
 }
