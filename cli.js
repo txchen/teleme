@@ -73,7 +73,7 @@ for (ent of htmlEntities){
 }
 text = text.split('\\n').join('\n') // to support multiline string in cli
 
-text += `<pre>[${hostname}:${process.cwd()}]\n${new Date().toISOString()}</pre>`
+text += `\n<pre>[${hostname}:${process.cwd()}]\n${new Date().toISOString()}</pre>`
 
 // call telegram REST api
 const jsonPayload = JSON.stringify({
