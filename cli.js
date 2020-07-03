@@ -24,6 +24,8 @@ if (process.argv.length > 2) {
     $ teleme <message>
     OR if you want to use the non-default bot
     $ TLMBOT=bot2 teleme <message>
+    If you want to send silent message
+    $ SILENT=true teleme <message>
   Examples
     $ teleme
     $ tlm
@@ -80,6 +82,7 @@ const jsonPayload = JSON.stringify({
   text,
   chat_id: configObj[chatidKey],
   parse_mode: 'HTML',
+  silent: process.env.TLMBOT === 'true'
 })
 
 const https = require('https')

@@ -44,6 +44,8 @@ $ teleme --help
     $ teleme <message>
     OR if you want to use the non-default bot
     $ TLMBOT=bot2 teleme <message>
+    If you want to send silent message
+    $ SILENT=true teleme <message>
   Examples
     $ teleme
     $ tlm
