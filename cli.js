@@ -82,7 +82,7 @@ const jsonPayload = JSON.stringify({
   text,
   chat_id: configObj[chatidKey],
   parse_mode: 'HTML',
-  silent: process.env.TLMBOT === 'true'
+  silent: process.env.SILENT === 'true'
 })
 
 const https = require('https')
