@@ -12,7 +12,7 @@ const htmlEntities = [
   { regex: />/g, entity: '&gt;' },
   { regex: /</g, entity: '&lt;' },
   { regex: /"/g, entity: '&quot;' },
-];
+]
 
 let text = 'Command completed'
 if (process.argv.length > 2) {
@@ -82,7 +82,7 @@ const jsonPayload = JSON.stringify({
   text,
   chat_id: configObj[chatidKey],
   parse_mode: 'HTML',
-  silent: process.env.SILENT === 'true'
+  disable_notification: process.env.SILENT === 'true'
 })
 
 const https = require('https')
